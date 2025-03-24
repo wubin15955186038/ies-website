@@ -1,0 +1,103 @@
+.banner4 {
+  background-color: #fbfdff;
+}
+
+.posion3 {
+  background: url(@/assets/imgs/cover3.png) no-repeat;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  height: 500px;
+}
+
+.image-cover3 {
+  width: 100%;
+  height: 500px;
+}
+
+.look-talent3 {
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 45px;
+  position: absolute;
+  left: 50%;
+  bottom: 196px;
+  transform: translateX(-50%);
+
+  font-family: PingFangSC-Medium, PingFang SC;
+}
+
+.Media {
+  font-size: 40px;
+  font-weight: 500;
+  color: #333333;
+  line-height: 56px;
+  padding: 65px 0 0px 0px;
+
+  font-family: PingFangSC-Medium, PingFang SC;
+}
+
+.Send-email {
+  font-size: 16px;
+  font-weight: 500;
+  color: #4e4b4b;
+  line-height: 30px;
+  padding-bottom: 20px;
+
+  font-family: PingFangSC-Medium, PingFang SC;
+}
+
+.contact-style {
+  display: flex;
+  padding: 0 0px 35px 0px;
+}
+
+.inputName {
+  font-size: 12px;
+  font-weight: 500;
+  color: #333333;
+  line-height: 25px;
+
+  font-family: PingFangSC-Medium, PingFang SC;
+}
+
+.contact-styles {
+  // padding: 0 0px 35px 0px;
+}
+
+.inputjoin {
+  width: 480px;
+  height: 50px;
+}
+
+.submit {
+  padding: 0px 0px 100px 0px;
+}
+
+.submit-style {
+  width: 100px;
+  height: 50px;
+  background: #036db7;
+  border-radius: 5px;
+  font-family: PingFangSC-Medium, PingFang SC;
+}
+
+.inputName-st {
+  padding-right: 30px;
+  flex: 1;
+}
+
+.textareas {
+  width: 1200px;
+  height: 140px;
+
+  textarea {
+    resize: none;
+  }
+}
+
+.nbk {
+  width: 990px;
+  margin: 0 auto;
+}

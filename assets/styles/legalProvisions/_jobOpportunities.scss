@@ -1,0 +1,440 @@
+.bannerjob {
+  background: #fbfdff;
+}
+
+.image-cover {
+  width: 100%;
+  height: 500px;
+}
+
+.look-talent {
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 45px;
+  position: absolute;
+  left: 50%;
+  bottom: 196px;
+  transform: translateX(-50%);
+
+  font-family: PingFangSC-Medium, PingFang SC;
+}
+
+.posion {
+  background: url(@/assets/imgs/cover1.png) no-repeat;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  height: 500px;
+}
+
+.search {
+  display: flex;
+  padding: 38px 40px 27px 40px;
+}
+
+.searchs {
+  flex: 1;
+}
+
+.posts {
+  flex: 1;
+}
+
+.search-content {
+  background-color: white;
+  margin: 0px 40px 40px 0px;
+  width: 880px;
+  border-radius: 10px;
+
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.03);
+}
+
+.job {
+  display: flex;
+  padding-bottom: 10px;
+  justify-content: space-between;
+}
+
+.job-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.job-content {
+  background-color: white;
+  margin: 40px 40px 0px 0px;
+  width: 880px;
+  // height: 650px;
+  padding: 20px 40px 27px 40px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.03);
+}
+
+.select-tab {
+  padding: 0 40px 27px 40px;
+}
+
+.Location {
+  display: flex;
+  line-height: 22px;
+  color: #666666;
+  font-weight: 500;
+  font-size: 16px;
+  padding-bottom: 16px;
+
+  &-content {
+    flex: 1;
+    display: flex;
+
+    &-list {
+      flex: 1;
+      height: 27px;
+      overflow: hidden;
+
+      > div {
+        > div {
+          display: flex;
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}
+
+.Focation {
+  display: flex;
+  line-height: 22px;
+  color: #666666;
+  font-weight: 500;
+  font-size: 16px;
+  padding-bottom: 16px;
+
+  &-content {
+    flex: 1;
+    display: flex;
+
+    &-list {
+      flex: 1;
+      height: 27px;
+      overflow: hidden;
+
+      > div {
+        > div {
+          display: flex;
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}
+
+.job-name {
+  line-height: 28px;
+  color: #333333;
+  font-weight: 500;
+  font-size: 20px;
+
+  font-family: PingFangSC-Medium, PingFang SC;
+}
+
+.job-salary {
+  line-height: 28px;
+  color: #b70303;
+  font-weight: 500;
+  font-size: 20px;
+
+  font-family: PingFangSC-Medium, PingFang SC;
+}
+
+.job-address {
+  line-height: 22px;
+  color: #666666;
+  font-weight: 400;
+  font-size: 16px;
+  padding-right: 15px;
+  border-right: 1px solid #e4efff;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+}
+
+.job-avg {
+  line-height: 22px;
+  color: #666666;
+  font-weight: 400;
+  font-size: 16px;
+  padding-right: 15px;
+  padding-left: 10px;
+  border-right: 1px solid #e4efff;
+
+  font-family: PingFangSC-Regular, PingFang SC;
+}
+
+.job-role {
+  line-height: 22px;
+  color: #666666;
+  font-weight: 400;
+  font-size: 16px;
+  padding-left: 10px;
+
+  font-family: PingFangSC-Regular, PingFang SC;
+}
+
+.Posted {
+  line-height: 22px;
+  color: #666666;
+  font-weight: 400;
+  font-size: 16px;
+
+  font-family: PingFangSC-Regular, PingFang SC;
+}
+
+.job-style {
+  padding-bottom: 25px;
+  padding-top: 20px;
+  border-bottom: 1px solid #eeeeee;
+  cursor: pointer;
+}
+
+.qrcode {
+  width: 280px;
+  height: 400px;
+  // margin-left: 40px;
+  background-color: white;
+  // padding: 45px 45px;
+  text-align: center;
+  padding-top: 45px;
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.03);
+  border-radius: 10px;
+}
+
+.qrcodes {
+  width: 280px;
+  height: 400px;
+  background-color: white;
+  text-align: center;
+  padding-top: 45px;
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.03);
+  border-radius: 10px;
+}
+
+.qr-image {
+  width: 220px;
+  height: 220px;
+}
+
+.code-image {
+  width: 220px;
+  height: 220px;
+}
+
+.Scanning {
+  font-size: 16px;
+  line-height: 25px;
+  color: #666666;
+  font-weight: 500;
+  text-align: center;
+  padding-top: 15px;
+  font-family: PingFangSC-Medium, PingFang SC;
+}
+
+.job-detail-style {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.jobdetail-bj {
+  // margin: 45px 0px;
+  padding: 45px 0;
+}
+
+.job-problem-content {
+  display: flex;
+  padding: 20px 80px 0px 0px;
+}
+
+.job-problem {
+  color: #999999;
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 500;
+  padding-right: 10px;
+
+  font-family: PingFangSC-Medium, PingFang SC;
+}
+
+.job-problem-type {
+  color: #036db7;
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 500;
+
+  font-family: PingFangSC-Medium, PingFang SC;
+}
+
+.job-tab-content {
+  background-color: white;
+  // margin-right: 40px;
+  width: 880px;
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.03);
+  border-radius: 10px;
+  min-height: 870px;
+  margin-right: 40px;
+}
+
+.job-problem-title {
+  color: #333333;
+  font-size: 28px;
+  line-height: 40px;
+  font-weight: 600;
+  padding: 20px 40px 20px 40px;
+
+  font-family: PingFangSC-Medium, PingFang SC;
+}
+
+.job-problem-detail {
+  line-height: 22px;
+  color: #333333;
+  font-size: 16px;
+  padding: 0px 40px 20px 40px;
+  white-space: pre-wrap;
+}
+
+.job-logo-content {
+  padding: 0px 80px 27px 40px;
+  line-height: 30px;
+  color: #b70303;
+  font-weight: 500;
+  font-size: 22px;
+
+  font-family: PingFangSC-Medium, PingFang SC;
+}
+
+.email-st {
+  color: #036db7;
+}
+
+.job-email {
+  width: 200px;
+  height: 65px;
+  line-height: 22px;
+  color: #666666;
+  font-weight: 400;
+  font-size: 16px;
+  text-align: right;
+
+  font-family: PingFangSC-Regular, PingFang SC;
+}
+
+.job-logo-content-title {
+  padding: 15px 40px 20px 40px;
+
+  font-family: PingFangSC-Medium, PingFang SC;
+
+  line-height: 30px;
+  color: #333333;
+  font-weight: 500;
+  font-size: 22px;
+}
+
+.job-address-detail {
+  line-height: 22px;
+  color: #666666;
+  font-weight: 400;
+  font-size: 16px;
+  border-right: 1px solid #e4efff;
+  padding: 0 15px 0px 0px;
+
+  font-family: PingFangSC-Regular, PingFang SC;
+}
+
+.job-avg-detail {
+  line-height: 22px;
+  color: #666666;
+  font-weight: 400;
+  font-size: 16px;
+  padding-right: 15px;
+  padding-left: 10px;
+  border-right: 1px solid #e4efff;
+
+  font-family: PingFangSC-Regular, PingFang SC;
+}
+
+.job-role-detail {
+  line-height: 22px;
+  color: #666666;
+  font-weight: 400;
+  font-size: 16px;
+  padding-left: 10px;
+
+  font-family: PingFangSC-Regular, PingFang SC;
+}
+
+.Posted-detail {
+  line-height: 22px;
+  color: #666666;
+  font-weight: 400;
+  font-size: 16px;
+  padding: 15px 40px 25px 0px;
+
+  font-family: PingFangSC-Regular, PingFang SC;
+}
+
+.job-introduce {
+  display: flex;
+  border-bottom: 1px solid #eeeeee;
+  margin: 0px 40px 25px 40px;
+}
+
+.layout {
+  display: flex;
+  justify-content: center;
+  margin: 0px auto;
+  padding: 45px 0;
+  width: 1200px;
+}
+
+.layouts {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.cocor {
+  color: #ffffff;
+  background-color: #036db7 !important;
+}
+
+.block {
+  text-align: center;
+  padding-top: 30px;
+}
+
+.Location-detail {
+  padding: 0 15px;
+  height: 27px;
+  margin: 0 5px;
+  border-radius: 5px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  cursor: pointer;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  background-color: #eeeeee;
+}
+
+.Function-detail {
+  padding: 0 15px;
+  height: 27px;
+  margin: 0 15px;
+  border-radius: 5px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  background-color: #eeeeee;
+}

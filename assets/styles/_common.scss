@@ -1,0 +1,97 @@
+.clearfix::after {
+  display: block;
+  content: '';
+  clear: both;
+}
+
+.flex {
+  display: flex;
+}
+
+.overflow {
+  overflow: hidden;
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+.width-1200 {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.ellipsi {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.app-container {
+  min-height: 100%;
+}
+
+.main {
+  // 75-导航 505页脚
+  min-height: calc(100vh - 505px);
+  margin-top: 75px;
+  box-sizing: border-box;
+}
+
+.breadcrumb {
+  font-size: 14px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #999999;
+  line-height: 20px;
+  margin-bottom: 36px;
+
+  span {
+    margin-right: 5px;
+  }
+}
+
+.text-blue {
+  color: #036db7 !important;
+}
+
+.text-gray {
+  color: #666666 !important;
+}
+
+.text-yellow {
+  color: #fdc207 !important;
+}
+
+.font-16 {
+  font-size: 16px;
+}
+
+.font-18 {
+  font-size: 18px;
+}
+
+.font-20 {
+  font-size: 20px;
+}
+
+.font-22 {
+  font-size: 22px;
+}
+
+.text-row-3 {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.pointer {
+  cursor: pointer;
+}

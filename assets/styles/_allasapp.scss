@@ -1,0 +1,233 @@
+.allas-app-wrap {
+  width: 1000px;
+  margin: 0 auto;
+  padding: 46px 0 72px 0;
+
+  .allas-app-cell1 {
+    display: flex;
+    width: 1000px;
+    margin: 0 auto;
+
+    .allas-app-cell1-left {
+      padding-top: 142px;
+      flex: 1;
+      font-size: 28px;
+      font-weight: 400;
+      color: #333333;
+
+      h1 {
+        font-size: 40px;
+        font-family: PingFangSC-Medium, PingFang SC;
+        font-weight: 500;
+        color: #333333;
+        line-height: 56px;
+      }
+
+      > div {
+        margin: 15px 0 40px 0;
+        font-size: 18px;
+        font-family: PingFangSC-Regular, PingFang SC;
+        font-weight: 400;
+        color: #333333;
+        line-height: 25px;
+      }
+
+      .allas-app-cell1-download {
+        cursor: pointer;
+        display: flex;
+        font-size: 14px;
+        font-family: PingFangSC-Regular, PingFang SC;
+        font-weight: 400;
+        color: #999999;
+        line-height: 20px;
+
+        > div {
+          text-align: center;
+          margin-right: 69px;
+
+          img {
+            width: 65px;
+            height: 65px;
+            margin-bottom: 15px;
+          }
+        }
+      }
+    }
+
+    .allas-app-cell1-right {
+      width: 325px;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  .allas-app-cell2 {
+    display: flex;
+    margin-top: 10px;
+
+    .allas-app-cell2-left {
+      width: 372px;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .allas-app-cell2-right {
+      flex: 1;
+      margin-left: 23px;
+      background: url(@/assets/imgs/allas-page-1-2.png) 0 83px no-repeat;
+      background-size: 150px 280px;
+      font-size: 16px;
+      font-family: PingFangSC-Regular, PingFang SC;
+      font-weight: 400;
+      color: #666666;
+      line-height: 22px;
+
+      > div {
+        h5 {
+          font-size: 22px;
+          font-family: PingFangSC-Regular, PingFang SC;
+          font-weight: 400;
+          color: #333333;
+          line-height: 30px;
+          margin-bottom: 10px;
+        }
+
+        &:nth-child(1) {
+          margin: 109px 0 0 107px;
+        }
+
+        &:nth-child(2) {
+          margin: 40px 0 0 141px;
+        }
+      }
+    }
+  }
+
+  .allas-app-cell3 {
+    display: flex;
+    margin-top: 10px;
+
+    .allas-app-cell3-left {
+      flex: 1;
+      background: url(@/assets/imgs/allas-page-3-4.png) 0 124px no-repeat;
+      background-size: 180px 240px;
+      font-size: 16px;
+      line-height: 25px;
+
+      > div {
+        font-size: 16px;
+        font-family: PingFangSC-Regular, PingFang SC;
+        font-weight: 400;
+        color: #666666;
+        line-height: 28px;
+
+        h5 {
+          font-size: 22px;
+          font-family: PingFangSC-Regular, PingFang SC;
+          font-weight: 400;
+          color: #333333;
+          line-height: 30px;
+          margin-bottom: 11px;
+        }
+
+        &:nth-child(1) {
+          margin: 144px 0 0 103px;
+        }
+
+        &:nth-child(2) {
+          margin: 71px 0 0 165px;
+        }
+      }
+    }
+
+    .allas-app-cell3-right {
+      width: 529px;
+      margin-right: -120px;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  .allas-app-cell4 {
+    display: flex;
+    margin-top: -10px;
+
+    .allas-app-cell4-left {
+      width: 535px;
+      margin-left: -200px;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .allas-app-cell4-right {
+      margin: 0 0 0 100px;
+      flex: 1;
+      background: url(@/assets/imgs/allas-page-5-6-7.png) 0 120px no-repeat;
+      background-size: 201px 400px;
+      font-size: 16px;
+      line-height: 22px;
+
+      > div {
+        font-size: 16px;
+        font-family: PingFangSC-Regular, PingFang SC;
+        font-weight: 400;
+        color: #666666;
+        line-height: 22px;
+
+        h5 {
+          font-size: 22px;
+          font-family: PingFangSC-Regular, PingFang SC;
+          font-weight: 400;
+          color: #333333;
+          line-height: 30px;
+          margin-bottom: 11px;
+        }
+
+        &:nth-child(1) {
+          margin: 131px 0 0 100px;
+        }
+
+        &:nth-child(2) {
+          margin: 72px 0 0 155px;
+        }
+
+        &:nth-child(3) {
+          margin: 60px 0 0 155px;
+        }
+      }
+
+      .allas-app-cell4-download {
+        font-size: 18px;
+        color: #999;
+        cursor: pointer;
+        display: flex;
+        line-height: 1.25;
+        margin: 40px 0 0 156px;
+
+        > div {
+          text-align: center;
+          margin-right: 60px;
+          font-size: 14px;
+          font-family: PingFangSC-Regular, PingFang SC;
+          font-weight: 400;
+          color: #999999;
+          line-height: 20px;
+
+          img {
+            width: 65px;
+            height: 65px;
+            margin-bottom: 15px;
+          }
+        }
+      }
+    }
+  }
+}
