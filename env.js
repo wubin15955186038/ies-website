@@ -1,7 +1,8 @@
 export default {
   dev: {
     MODE: 'dev',
-    baseURL: 'https://dev.devcos.net/ies/api'
+    baseURL: '//api.achieve-ai.com'
+    // baseURL: 'https://dev.devcos.net/ies/api'
   },
   prod: {
     MODE: 'pro',
