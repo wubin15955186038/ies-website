@@ -1,35 +1,40 @@
 <template>
   <div class="star-box">
-    <div class="score"></div>
+    <div class="difficulty" :style="{ width: `${width}px` }"></div>
   </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {}
+  props: {
+    difficulty: {
+      type: Number,
+      default: 0.5
+    }
   },
-  created() {},
-  methods: {}
+  data() {
+    return {
+      width: 0
+    }
+  },
+  mounted() {
+    this.width = this.$props.difficulty * 80
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 .star-box {
-  position: relative;
-  width: 85px;
-  height: 17px;
+  width: 80px;
+  height: 15px;
   background: url(~/assets/imgs/questions/star-gray-icon.png) repeat-x;
   background-position: 0px 0px;
 
-  .score {
-    position: absolute;
-    left: 2px;
-    top: 50%;
-    transform: translateY(-50%);
+  .difficulty {
     width: 80px;
-    height: 16px;
+    height: 15px;
     background: url(~/assets/imgs/questions/star-icon.png) repeat-x;
+    background-position: 0px 0px;
   }
 }
 </style>
