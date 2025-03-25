@@ -22,18 +22,7 @@
     <div class="questions-wrap">
       <div class="questions-list" v-if="5 > 0">
         <nuxt-link to="/question-detail/1234">
-          <div class="questions-item" v-for="i in 5" :key="i">
-            <div class="stars"></div>
-            <div class="content ellipsis">
-              Integration of sin²(x) from 0 to π, Find ∫ oP sin²(x)dx using dóuble angle formula and basic integration techniques.Integration of sin²(x) from 0 to π, Find ∫ oP sin²(x)dx using dóuble
-              angle formula and basic integration techniques.Integration of sin²(x) from 0 to π, Find ∫ oP sin²(x)dx using dóuble angle formula and basic integration techniques.
-            </div>
-            <div class="tags">
-              <div class="tag subject">Biology</div>
-              <div class="tag level">Intermediate</div>
-              <div class="tag exam-type">Sat</div>
-            </div>
-          </div>
+          <QuestionItem v-for="i in 5" :key="i"></QuestionItem>
         </nuxt-link>
         <el-pagination background :hide-on-single-page="true" :page-size="5" layout="prev, pager, next" :total="50" @current-change="onHandlePageChange"> </el-pagination>
       </div>
@@ -44,6 +33,7 @@
 
 <script>
 import startUapm from '../plugins/uapm'
+
 export default {
   data() {
     return {
@@ -134,13 +124,6 @@ export default {
 ::v-deep .el-pagination {
   text-align: right;
 }
-.ellipsis {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2; /* 限制文本为2行 */
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 .questions-condition-wrap {
   display: flex;
   flex-direction: column;
@@ -192,61 +175,6 @@ export default {
   padding: 24px 83px;
   background: #eef1f4;
 
-  .questions-list {
-    .questions-item {
-      position: relative;
-      padding: 70px 25px 96px;
-      margin-bottom: 24px;
-      border-radius: 10px;
-      border: 1px solid #e4e6ea;
-      background: #ffffff;
-      cursor: pointer;
-
-      .stars {
-        position: absolute;
-        top: 44px;
-        left: 25px;
-        width: 85px;
-        height: 17px;
-        background: url(~/assets/imgs/questions/star-icon.png) repeat-x;
-        cursor: default;
-      }
-      .content {
-        font-size: 18px;
-        font-weight: 500;
-        color: #4e4b4b;
-        line-height: 34px;
-      }
-      .tags {
-        display: flex;
-        gap: 10px;
-        position: absolute;
-        bottom: 41px;
-        left: 25px;
-
-        .tag {
-          padding: 0 10px;
-          border-radius: 15px;
-          height: 30px;
-          line-height: 30px;
-          font-size: 14px;
-          cursor: default;
-
-          &.subject {
-            color: #006fb7;
-            background: #d9eaf4;
-          }
-          &.level {
-            color: #087732;
-            background: #dcfce7;
-          }
-          &.exam-type {
-            color: #7715cb;
-            background: #f3e8ff;
-          }
-        }
-      }
-    }
-  }
+  .questions-list {}
 }
 </style>
