@@ -1,5 +1,25 @@
 export default ($axios) => {
   return {
+    // 获取题库查询选项
+    getQueryOptions: () => $axios.get('/question/queryOptions'),
+    // 分页查询题目列表
+    getQuestionList: (form, pageNum, pageSize = 10) => {
+      const { subjectId, levelId, examId } = form
+      return $axios({
+        url: '/question/query',
+        method: 'post',
+        data: {
+          params: {
+            subjectId,
+            programId: levelId,
+            examBoardId: examId
+          },
+          start: (pageNum - 1) * pageSize,
+          limit: pageSize
+        }
+      })
+    },
+
     // 根据栏目编码查询文章详情
     getByColumnCode: (params) => $axios.get('/teaching/pc/article/getByColumnCode/' + params),
 

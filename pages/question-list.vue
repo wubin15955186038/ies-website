@@ -11,20 +11,41 @@
     </div>
 
     <div class="questions-condition-wrap">
-      <div class="questions-condition-line" v-for="(condition, i) in conditionList" :key="i">
-        <div class="condition-title">{{ condition.title }}:</div>
+      <div class="questions-condition-line">
+        <div class="condition-title">Subject:</div>
         <div class="condition-values">
-          <div :class="['value', value === searchForm[condition.code] ? 'active' : '']" v-for="(value, j) in condition.values" :key="j" @click="onHandleSearch(condition.code, value)">{{ value }}</div>
+          <div :class="['value', item.value === searchForm.subjectId && 'active']" v-for="(item, index) in [defaultOption, ...subjects]" :key="index" @click="onHandleSearch('subjectId', item.value)">
+            {{ item.text }}
+          </div>
+        </div>
+      </div>
+
+      <div class="questions-condition-line">
+        <div class="condition-title">Level:</div>
+        <div class="condition-values">
+          <div :class="['value', item.value === searchForm.levelId && 'active']" v-for="(item, index) in [defaultOption, ...programs]" :key="index" @click="onHandleSearch('levelId', item.value)">
+            {{ item.text }}
+          </div>
+        </div>
+      </div>
+
+      <div class="questions-condition-line">
+        <div class="condition-title">Exam Type:</div>
+        <div class="condition-values">
+          <div :class="['value', item.value === searchForm.examId && 'active']" v-for="(item, index) in [defaultOption, ...exams]" :key="index" @click="onHandleSearch('examId', item.value)">
+            {{ item.text }}
+          </div>
         </div>
       </div>
     </div>
 
     <div class="questions-wrap">
-      <div class="questions-list" v-if="5 > 0">
+      <div class="questions-list" v-if="questionList.length > 0">
         <nuxt-link to="/question-detail/1234">
-          <QuestionItem v-for="i in 5" :key="i"></QuestionItem>
+          <QuestionItem v-for="item in questionList" :key="item.id" :question="item"></QuestionItem>
         </nuxt-link>
-        <el-pagination background :hide-on-single-page="true" :page-size="5" layout="prev, pager, next" :total="50" @current-change="onHandlePageChange"> </el-pagination>
+        <el-pagination background :hide-on-single-page="pager.totalPage === 1" :page-size="pager.size" layout="prev, pager, next" :total="pager.total" @current-change="onHandlePageChange">
+        </el-pagination>
       </div>
       <el-empty description="暂无数据" v-else></el-empty>
     </div>
@@ -38,30 +59,20 @@ export default {
   data() {
     return {
       bannerList: [],
-      conditionList: [
-        {
-          title: 'Subject',
-          code: 'subject',
-          values: ['All', 'Mathematics', 'English ', 'Biology ', 'Chemistry', 'Economics', 'Business', 'More ']
-        },
-        {
-          title: 'Level',
-          code: 'level',
-          values: ['All', 'Basic', 'Intermediate', 'Advanced']
-        },
-        {
-          title: 'Exam Type',
-          code: 'examType',
-          values: ['All', 'Ib', 'Ap', 'Sat']
-        }
-      ],
+      defaultOption: { text: 'All', value: '' },
+      exams: [],
       questionList: [],
+      pager: { num: 1, size: 10, total: 0, totalPage: 0 },
       searchForm: {
-        subject: 0,
-        level: null,
-        examType: 0
+        subjectId: '',
+        levelId: '',
+        examId: ''
       }
     }
+  },
+  async asyncData(context) {
+    const { programs, subjects } = await context.app.$api.getQueryOptions()
+    return { programs, subjects }
   },
   head() {
     return {
@@ -82,31 +93,37 @@ export default {
   mounted() {
     startUapm()
     this.getbannerTops()
+    this.getQuestionList()
   },
   methods: {
     // 获取网站首页banner
-    async getbannerTops() {
-      await this.$api.getbannerTops().then((res) => {
+    getbannerTops() {
+      this.$api.getbannerTops().then((res) => {
         this.bannerList = res
       })
     },
+    // 获取题目列表
+    async getQuestionList() {
+      const { searchForm, pager } = this
+      const { data, total, totalPage } = await this.$api.getQuestionList(searchForm, pager.num, pager.size)
+      this.questionList = data || []
+      this.pager.total = total || 0
+      this.pager.totalPage = totalPage || 0
+    },
     onHandleSearch(code, value) {
+      if (this.searchForm[code] === value) return
       this.searchForm[code] = value
+      if (code === 'levelId') {
+        const program = this.programs.find((pro) => pro.value === value) || {}
+        this.exams = Array.isArray(program.children) ? [...program.children] : []
+        this.searchForm.examId = ''
+      }
+      this.pager.num = 1
+      this.getQuestionList()
     },
     onHandlePageChange(page) {
-      console.log('page: ', page)
-    },
-    async getEssaylist() {
-      await this.$api.getEssaylist({ columnCode: 'FAQ_FOR_TUTOR' }).then((res) => {
-        if (res.length) {
-          const list = res.slice(0, 5)
-          list.forEach((item) => {
-            const range = document.createRange()
-            const fragment = range.createContextualFragment(item.detail)
-            item.detail = fragment.textContent
-          })
-        }
-      })
+      this.pager.num = page
+      this.getQuestionList()
     }
   }
 }
@@ -175,6 +192,7 @@ export default {
   padding: 24px 83px;
   background: #eef1f4;
 
-  .questions-list {}
+  .questions-list {
+  }
 }
 </style>

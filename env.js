@@ -1,7 +1,7 @@
 export default {
   dev: {
     MODE: 'dev',
-    baseURL: '//api.achieve-ai.com'
+    baseURL: 'https://tiku.hainiu.biz/api'
     // baseURL: 'https://dev.devcos.net/ies/api'
   },
   prod: {
