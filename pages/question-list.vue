@@ -11,38 +11,41 @@
     </div>
 
     <div class="questions-condition-wrap">
-      <div class="questions-condition-line">
+      <div :class="['questions-condition-line', subjectHeight > 32 && 'more-suffix']" :style="{ height: `${subjectOpend ? subjectHeight : 32}px` }">
         <div class="condition-title">Subject:</div>
-        <div class="condition-values">
+        <div class="condition-values" ref="subjectRef">
           <div :class="['value', item.value === searchForm.subjectId && 'active']" v-for="(item, index) in [defaultOption, ...subjects]" :key="index" @click="onHandleSearch('subjectId', item.value)">
             {{ item.text }}
           </div>
         </div>
+        <div :class="['more-btn', subjectOpend && 'open']" @click="subjectOpend = !subjectOpend">more</div>
       </div>
 
-      <div class="questions-condition-line">
+      <div :class="['questions-condition-line', levelHeight > 32 && 'more-suffix']" :style="{ height: `${levelOpend ? levelHeight : 32}px` }">
         <div class="condition-title">Level:</div>
-        <div class="condition-values">
+        <div class="condition-values" ref="levelRef">
           <div :class="['value', item.value === searchForm.levelId && 'active']" v-for="(item, index) in [defaultOption, ...programs]" :key="index" @click="onHandleSearch('levelId', item.value)">
             {{ item.text }}
           </div>
         </div>
+        <div :class="['more-btn', levelOpend && 'open']" @click="levelOpend = !levelOpend">more</div>
       </div>
 
-      <div class="questions-condition-line">
+      <div :class="['questions-condition-line', examHeight > 32 && 'more-suffix']" :style="{ height: `${examOpend ? examHeight : 32}px` }">
         <div class="condition-title">Exam Type:</div>
-        <div class="condition-values">
+        <div class="condition-values" ref="examRef">
           <div :class="['value', item.value === searchForm.examId && 'active']" v-for="(item, index) in [defaultOption, ...exams]" :key="index" @click="onHandleSearch('examId', item.value)">
             {{ item.text }}
           </div>
         </div>
+        <div :class="['more-btn', examOpend && 'open']" @click="examOpend = !examOpend">more</div>
       </div>
     </div>
 
     <div class="questions-wrap">
       <div class="questions-list" v-if="questionList.length > 0">
-        <nuxt-link to="/question-detail/1234">
-          <QuestionItem v-for="item in questionList" :key="item.id" :question="item"></QuestionItem>
+        <nuxt-link v-for="item in questionList" :key="item.id" :to="`/question-detail/${item.id}`">
+          <QuestionItem :question="item"></QuestionItem>
         </nuxt-link>
         <el-pagination background :hide-on-single-page="pager.totalPage === 1" :page-size="pager.size" layout="prev, pager, next" :total="pager.total" @current-change="onHandlePageChange">
         </el-pagination>
@@ -67,7 +70,13 @@ export default {
         subjectId: '',
         levelId: '',
         examId: ''
-      }
+      },
+      subjectHeight: 32,
+      levelHeight: 32,
+      examHeight: 32,
+      subjectOpend: false,
+      levelOpend: false,
+      examOpend: false
     }
   },
   async asyncData(context) {
@@ -94,6 +103,10 @@ export default {
     startUapm()
     this.getbannerTops()
     this.getQuestionList()
+
+    this.subjectHeight = this.$refs.subjectRef.offsetHeight
+    this.levelHeight = this.$refs.levelRef.offsetHeight
+    this.examHeight = this.$refs.examRef.offsetHeight
   },
   methods: {
     // 获取网站首页banner
@@ -117,6 +130,9 @@ export default {
         const program = this.programs.find((pro) => pro.value === value) || {}
         this.exams = Array.isArray(program.children) ? [...program.children] : []
         this.searchForm.examId = ''
+        this.$nextTick(() => {
+          this.examHeight = this.$refs.examRef.offsetHeight
+        })
       }
       this.pager.num = 1
       this.getQuestionList()
@@ -152,6 +168,7 @@ export default {
   .questions-condition-line {
     position: relative;
     padding-left: 125px;
+    overflow: hidden;
 
     .condition-title {
       position: absolute;
@@ -183,6 +200,44 @@ export default {
         &.active {
           color: #eef1f4;
           background: #006fb7;
+        }
+      }
+    }
+    .more-btn {
+      display: none;
+    }
+    &.more-suffix {
+      padding-right: 100px;
+      transition: height 0.2s linear;
+
+      .more-btn {
+        display: block;
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 32px;
+        line-height: 32px;
+        font-size: 14px;
+        color: #4e4b4b;
+        padding: 0 34px 0 17px;
+        border-radius: 6px;
+        background: #eef1f4;
+        cursor: pointer;
+
+        &::after {
+          content: '';
+          position: absolute;
+          right: 10px;
+          top: 50%;
+          width: 14px;
+          height: 8px;
+          margin-top: -4px;
+          background: url(~/assets/imgs/questions/arrow-icon.png) no-repeat;
+          background-size: 100% 100%;
+        }
+
+        &.open::after {
+          transform: rotateZ(180deg);
         }
       }
     }

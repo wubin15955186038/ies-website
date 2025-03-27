@@ -1,13 +1,28 @@
 export default ($axios) => {
   return {
+    // 获取当前所有平台最新版本
+    getLatestClientVersion: () => {
+      return $axios({
+        method: 'get',
+        url: '/clientVersion/latests',
+        baseURL: process.env.tikuURL
+      })
+    },
     // 获取题库查询选项
-    getQueryOptions: () => $axios.get('/question/queryOptions'),
+    getQueryOptions: () => {
+      return $axios({
+        method: 'get',
+        url: '/question/queryOptions',
+        baseURL: process.env.tikuURL
+      })
+    },
     // 分页查询题目列表
     getQuestionList: (form, pageNum, pageSize = 10) => {
       const { subjectId, levelId, examId } = form
       return $axios({
-        url: '/question/query',
         method: 'post',
+        url: '/question/query',
+        baseURL: process.env.tikuURL,
         data: {
           params: {
             subjectId,
@@ -17,6 +32,22 @@ export default ($axios) => {
           start: (pageNum - 1) * pageSize,
           limit: pageSize
         }
+      })
+    },
+    // 按ID获取题目详情
+    getQuestionDetail: (id) => {
+      return $axios({
+        method: 'get',
+        url: `/question/get/${id}`,
+        baseURL: process.env.tikuURL
+      })
+    },
+    // 按题目ID获取相关题目
+    getRelatedQuestions: (id) => {
+      return $axios({
+        method: 'get',
+        url: `/question/related/${id}`,
+        baseURL: process.env.tikuURL
       })
     },
 

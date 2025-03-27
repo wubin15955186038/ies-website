@@ -1,20 +1,25 @@
 <template>
   <div class="questions-item">
-    <Star class="stars"></Star>
+    <Star class="stars" :difficulty="question.difficultLevelValue"></Star>
     <div class="content ellipsis">
-      Integration of sin²(x) from 0 to π, Find ∫ oP sin²(x)dx using dóuble angle formula and basic integration techniques.Integration of sin²(x) from 0 to π, Find ∫ oP sin²(x)dx using dóuble
-      angle formula and basic integration techniques.Integration of sin²(x) from 0 to π, Find ∫ oP sin²(x)dx using dóuble angle formula and basic integration techniques.
+      {{ question.contentIntro }}
     </div>
     <div class="tags">
-      <div class="tag subject">Biology</div>
-      <div class="tag level">Intermediate</div>
-      <div class="tag exam-type">Sat</div>
+      <div class="tag subject">{{ question.subjectName }}</div>
+      <div class="tag level">{{ question.programName }}</div>
+      <div class="tag exam-type">{{ question.examBoardName }}</div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    question: {
+      type: Object,
+      default: () => ({})
+    }
+  },
   data() {
     return {}
   },

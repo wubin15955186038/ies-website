@@ -9,16 +9,13 @@ export default {
   props: {
     difficulty: {
       type: Number,
-      default: 0.5
+      default: 0
     }
   },
-  data() {
-    return {
-      width: 0
+  computed: {
+    width() {
+      return (this.$props.difficulty / 5) * 80
     }
-  },
-  mounted() {
-    this.width = this.$props.difficulty * 80
   }
 }
 </script>
