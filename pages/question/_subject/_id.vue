@@ -51,7 +51,7 @@
     </div>
     <div class="related-question">
       <div class="title">Related Question</div>
-      <nuxt-link v-for="item in relatedQuestions" :key="item.id" :to="`/question/${$route.params.subjec}/${item.suffix}_${item.id}`" replace>
+      <nuxt-link v-for="item in relatedQuestions" :key="item.id" :to="`/question/${item.subjectName.split(' ').join('_')}/${item.prefix}_${item.id}`" replace>
         <QuestionItem :question="item"></QuestionItem>
       </nuxt-link>
     </div>
@@ -92,15 +92,22 @@ export default {
   methods: {
     async getQuestionDetail(id) {
       const res = await this.$api.getQuestionDetail(id)
-      this.question = res
+      this.question = res || {}
     },
     async getRelatedQuestions(id) {
       const res = await this.$api.getRelatedQuestions(id)
-      this.relatedQuestions = res
+      this.relatedQuestions = (res || []).map(item => {
+        // 题目内容前4个单词：列表接口拼接好作为一个描述字段，每个单词下划线拼接
+        const prefix = item.contentIntro.split(' ').slice(0, 4).join('_')
+        return {
+          ...item,
+          prefix
+        }
+      })
     },
     async getLatestClientVersion() {
       const res = await this.$api.getLatestClientVersion()
-      this.androidLink = res.find((item) => item.client === 'android')?.url
+      this.androidLink = (res || []).find((item) => item.client === 'android')?.url
     },
     onHandleDownloadApp(type) {
       let link = ''
