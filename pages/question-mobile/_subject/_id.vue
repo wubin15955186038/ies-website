@@ -2,7 +2,7 @@
   <div class="mobile-wrap">
     <div class="mobile-header">
       <img src="@/assets/imgs/questions-mobile/logo.png" />
-      <span class="back-icon"></span>
+      <span class="back-icon" @click="$router.back()"></span>
     </div>
 
     <div class="mobile-body">
@@ -21,8 +21,8 @@
         </div>
       </div>
       <div class="question-detail2">
-        <div class="answer-box">
-          <div class="title">Answer:</div>
+        <div :class="['answer-box', answerContentVisible && 'open']">
+          <div class="title" @click="answerContentVisible = !answerContentVisible">Answer:</div>
           <div class="content">
             <div v-latex="question.exampleAnswer"></div>
           </div>
@@ -34,39 +34,39 @@
             <div v-for="item in question.syllabuses || []" :key="item.id">{{ item.remark }}</div>
           </div>
         </div>
-        <div class="solution-btn">Solution</div>
-
-        <!-- <el-collapse accordion>
-          <el-collapse-item>
-            <template slot="title"><span class="collapse-title">Answer :</span></template>
-            <div class="collapse-content" v-latex="question.exampleAnswer"></div>
-          </el-collapse-item>
-        </el-collapse> -->
-
-        <!-- <el-tabs>
-          <el-tab-pane label="Solution">
-            <div class="solution-content">
-              <div class="desc">Download APP for more features</div>
-              <div class="desc-1">1. Tons of answers.</div>
-              <div class="desc-1">2. Smarter Al tools enhance your learning journey.</div>
-              <div class="download-box">
-                <div class="download-app ios" @click="onHandleDownloadApp('ios')">IOS<br />Download</div>
-                <div class="download-app android" @click="onHandleDownloadApp('android')">Android<br />Download</div>
-                <div class="download-app google" @click="onHandleDownloadApp('google')">Google Play<br />Download</div>
-              </div>
-              <div class="inner-qrcode"></div>
-            </div>
-          </el-tab-pane>
-          <el-tab-pane label="Analysis"> </el-tab-pane>
-        </el-tabs> -->
+        <div class="solution-btn" @click="solutionModalVisible = true">Solution</div>
       </div>
       <div class="related-question">
         <div class="title">Related Question</div>
-        <nuxt-link v-for="item in relatedQuestions" :key="item.id" :to="`/question/${item.subjectName.split(' ').join('_')}/${item.prefix}_${item.id}`" replace>
+        <nuxt-link v-for="item in relatedQuestions" :key="item.id" :to="`/question-mobile/${item.subjectName.split(' ').join('_')}/${item.prefix}_${item.id}`" replace>
           <QuestionItemMobile :question="item" />
         </nuxt-link>
       </div>
       <div class="mobile-footer">@2024 All As ALPHA INTERNATIONAL AI EDTECH PTE. LTD</div>
+    </div>
+    <div class="solution-modal" v-show="solutionModalVisible">
+      <div class="mask"></div>
+      <div class="content">
+        <div class="desc">Download APP for more features</div>
+        <div class="desc-1">1. Tons of answers.</div>
+        <div class="desc-1">2. Smarter Al tools enhance your learning journey.</div>
+        <div class="inner-qrcode"></div>
+        <div class="download-box">
+          <div class="download-app ios" @click="onHandleDownloadApp('ios')">
+            <div>IOS</div>
+            <div>Download</div>
+          </div>
+          <div class="download-app android" @click="onHandleDownloadApp('android')">
+            <div>Android</div>
+            <div>Download</div>
+          </div>
+          <div class="download-app google" @click="onHandleDownloadApp('google')">
+            <div>Google Play</div>
+            <div>Download</div>
+          </div>
+        </div>
+        <div class="close-btn" @click="solutionModalVisible = false"></div>
+      </div>
     </div>
   </div>
 </template>
@@ -83,7 +83,9 @@ export default {
       headTitle: 'Question Detail',
       question: {},
       relatedQuestions: [],
-      androidLink: ''
+      androidLink: '',
+      answerContentVisible: false,
+      solutionModalVisible: false
     }
   },
   created() {
@@ -128,37 +130,36 @@ export default {
       this.androidLink = (res || []).find((item) => item.client === 'android')?.url
     },
     onHandleDownloadApp(type) {
-      let link = ''
-      switch (type) {
-        case 'ios':
-          link = this.config.iosLink
-          break
-        case 'android':
-          link = this.androidLink
-          break
-        case 'google':
-          link = this.config.googleLink
-          break
-      }
-      window.open(link, '_blank')
+      this.$router.push({ path: '/download' })
+      // let link = ''
+      // switch (type) {
+      //   case 'ios':
+      //     link = this.config.iosLink
+      //     break
+      //   case 'android':
+      //     link = this.androidLink
+      //     break
+      //   case 'google':
+      //     link = this.config.googleLink
+      //     break
+      // }
+      // window.open(link, '_blank')
     }
   }
 }
 </script>
+
 <style lang="scss" scoped>
 ::v-deep .question-detail2 {
-  img.img-graphic {
+  img {
     max-width: 100%;
     max-height: 100%;
   }
 }
-::v-deep .el-tabs__nav-wrap {
-  &::after {
-    display: none;
-  }
-  .el-tabs__nav-scroll {
-    display: flex;
-    justify-content: center;
+::v-deep .question-content {
+  img {
+    max-width: 100%;
+    max-height: 100%;
   }
 }
 .mobile-wrap {
@@ -205,8 +206,10 @@ export default {
       height: 30px;
     }
   }
+
   .mobile-body {
-    height: calc(100% - 44px);
+    height: 100%;
+    overflow: auto;
 
     .question-detail {
       position: relative;
@@ -287,72 +290,6 @@ export default {
           }
         }
       }
-
-      .solution-content {
-        position: relative;
-        padding: 82px 377px 69px 67px;
-        background: rgba(51, 51, 51, 0.7);
-
-        .desc {
-          font-size: 36px;
-          line-height: 36px;
-          color: #ffffff;
-          padding-bottom: 30px;
-        }
-        .desc-1 {
-          font-size: 22px;
-          line-height: 30px;
-          color: #ffffff;
-        }
-        .download-box {
-          padding: 30px 14px 0 14px;
-          display: flex;
-          gap: 69px;
-
-          .download-app {
-            position: relative;
-            height: 108px;
-            padding-top: 68px;
-            color: #c6c6c6;
-            font-size: 14px;
-            text-align: center;
-            line-height: 20px;
-            cursor: pointer;
-
-            &::before {
-              content: '';
-              position: absolute;
-              left: 50%;
-              top: 10px;
-              width: 40px;
-              height: 40px;
-              transform: translateX(-50%);
-            }
-            &.ios::before {
-              background: url(~/assets/imgs/questions/ios-icon.png) no-repeat;
-              background-size: 100% 100%;
-            }
-            &.android::before {
-              background: url(~/assets/imgs/questions/android-icon.png) no-repeat;
-              background-size: 100% 100%;
-            }
-            &.google::before {
-              background: url(~/assets/imgs/questions/google-icon.png) no-repeat;
-              background-size: 100% 100%;
-            }
-          }
-        }
-        .inner-qrcode {
-          position: absolute;
-          top: 94px;
-          right: 73px;
-          width: 220px;
-          height: 220px;
-          border-radius: 10px;
-          background: url(~/assets/imgs/qrcode.png) no-repeat;
-          background-size: 100% 100%;
-        }
-      }
     }
     .question-detail2 {
       position: relative;
@@ -369,7 +306,35 @@ export default {
       .analysis-box {
         padding: 16px 0 20px;
 
+        &.answer-box {
+          transition: height 0.3s linear;
+
+          &.open {
+            .title::after {
+              transform: rotateZ(0deg);
+            }
+            .content {
+              display: block;
+            }
+          }
+          .title::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            width: 16px;
+            height: 18px;
+            margin-top: -9px;
+            transform: rotateZ(-90deg);
+            background: url(~/assets/imgs/questions-mobile/arrow-icon.png) no-repeat;
+            background-size: 100% 100%;
+          }
+          .content {
+            display: none;
+          }
+        }
         .title {
+          position: relative;
           color: #4e4b4b;
           font-size: 17px;
           font-weight: 500;
@@ -409,6 +374,109 @@ export default {
       font-size: 12px;
       font-weight: 400;
       color: #999999;
+    }
+  }
+
+  .solution-modal {
+    .mask {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.3);
+    }
+    .content {
+      position: fixed;
+      top: 50%;
+      left: 20px;
+      right: 20px;
+      transform: translateY(-50%);
+      padding: 42px 23px 40px;
+      border-radius: 20px;
+      background: #ffffff;
+
+      .desc {
+        color: #006fb7;
+        font-size: 18px;
+        line-height: 22px;
+        padding-bottom: 18px;
+      }
+      .desc-1 {
+        color: #4e4b4b;
+        font-size: 13px;
+        line-height: 22px;
+      }
+      .inner-qrcode {
+        position: relative;
+        width: 165px;
+        height: 165px;
+        margin: 35px auto 32px;
+        border-radius: 5px;
+        background: #e4e6ea;
+
+        &::after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 152px;
+          height: 152px;
+          transform: translate(-50%, -50%);
+          border-radius: 5px;
+          background: url(~/assets/imgs/qrcode.png) no-repeat;
+          background-size: 100% 100%;
+        }
+      }
+      .download-box {
+        display: flex;
+        justify-content: space-evenly;
+        gap: 20px;
+
+        .download-app {
+          position: relative;
+          height: 68px;
+          padding-top: 40px;
+          color: #999999;
+          font-size: 12px;
+          text-align: center;
+          line-height: 14px;
+          white-space: nowrap;
+          cursor: pointer;
+
+          &::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 5px;
+            width: 25px;
+            height: 25px;
+            transform: translateX(-50%);
+          }
+          &.ios::before {
+            background: url(~/assets/imgs/questions/ios-icon.png) no-repeat;
+            background-size: 100% 100%;
+          }
+          &.android::before {
+            background: url(~/assets/imgs/questions/android-icon.png) no-repeat;
+            background-size: 100% 100%;
+          }
+          &.google::before {
+            background: url(~/assets/imgs/questions/google-icon.png) no-repeat;
+            background-size: 100% 100%;
+          }
+        }
+      }
+      .close-btn {
+        position: absolute;
+        bottom: -53px;
+        left: 50%;
+        width: 45px;
+        height: 45px;
+        margin-left: -22.5px;
+        background: url(~/assets/imgs/questions-mobile/close-icon.png) no-repeat;
+        background-size: 100% 100%;
+      }
     }
   }
 }
