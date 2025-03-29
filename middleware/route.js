@@ -3,9 +3,10 @@ export default function ({ isServer, req, redirect, route }) {
     return !!ua.match(/AppleWebKit.*Mobile.*/)
   }
   const userAgent = req ? req.headers['user-agent'] : navigator.userAgent || ''
+  console.log(route.name, isMobile(userAgent))
   if (isMobile(userAgent)) {
-    if (route.name === 'download' || route.name === 'questions') {
-      console.log('aaaa')
+    const routeNames = ['download', 'questions', 'question-mobile-subject', 'question-mobile-subject-id']
+    if (routeNames.includes(route.name)) {
       return redirect(route.fullaPth)
     } else {
       return redirect('/mobile')

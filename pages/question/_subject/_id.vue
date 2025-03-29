@@ -8,7 +8,7 @@
 
     <div class="question-detail">
       <Star class="stars" :difficulty="question.difficultLevelValue"></Star>
-      <div class="question-content" v-html="question.content"></div>
+      <div class="question-content" v-latex="question.content"></div>
       <div class="statu-tag-line">
         <div class="tags">
           <div class="tag subject">{{ question.subjectName }}</div>
@@ -25,7 +25,7 @@
       <el-collapse accordion>
         <el-collapse-item>
           <template slot="title"><span class="collapse-title">Answer :</span></template>
-          <div class="collapse-content" v-html="question.exampleAnswer"></div>
+          <div class="collapse-content" v-latex="question.exampleAnswer"></div>
         </el-collapse-item>
       </el-collapse>
       <el-tabs>
@@ -59,7 +59,11 @@
 </template>
 
 <script>
+import latex from '../../../plugins/latex'
 export default {
+  directives: {
+    latex
+  },
   data() {
     return {
       headTitle: 'Question Detail',
@@ -96,7 +100,7 @@ export default {
     },
     async getRelatedQuestions(id) {
       const res = await this.$api.getRelatedQuestions(id)
-      this.relatedQuestions = (res || []).map(item => {
+      this.relatedQuestions = (res || []).map((item) => {
         // 题目内容前4个单词：列表接口拼接好作为一个描述字段，每个单词下划线拼接
         const prefix = item.contentIntro.split(' ').slice(0, 4).join('_')
         return {

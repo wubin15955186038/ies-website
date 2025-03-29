@@ -39,7 +39,7 @@ MathJax.prototype = {
           processHtmlClass: 'tex2jax_process'
         }
       }
-      script.src = './mathjax/tex-chtml.js'
+      script.src = '/mathjax/tex-chtml.js'
       document.body.appendChild(script)
     })
 
